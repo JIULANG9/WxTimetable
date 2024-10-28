@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/course/course",
+    "pages/course/list/list",
+    "pages/course/info/info",
+    "pages/course/setBg/setBg",
+    "pages/course/setTime/setTime",
+    "pages/course/add/add",
+    "pages/cropper/cropper",
+    "pages/course/share/share",
+    "pages/mine/mine",
+    "pages/mine/about/about",
+    "pages/mine/about/official"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationStyle": "custom",
+    "navigationBarTextStyle": "black"
+  },
+  "usingComponents": {
+    "cu-custom": "colorui/components/cu-custom",
+    "navigation-bar": "pages/components/navigation-bar/navigation-bar"
+  },
+  "tabBar": {
+    "color": "#cdcdcd",
+    "selectedColor": "#23EBB9",
+    "list": [
+      {
+        "pagePath": "pages/course/course",
+        "iconPath": "/images/tabbar/ic_schedule.png",
+        "selectedIconPath": "/images/tabbar/ic_schedule_selected.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "iconPath": "/images/tabbar/ic_mine_normal.png",
+        "selectedIconPath": "/images/tabbar/ic_mine_selected.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json",
+  "navigateToMiniProgramAppIdList": [
+    "wxdd704a218e411493"
+  ]
+}

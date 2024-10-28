@@ -1,0 +1,52 @@
+@import "colorui/main.wxss";
+@import "colorui/icon.wxss";
+@import "colorui/animation.wxss";
+/* 换肤 */
+@import "theme/theme.wxss";
+
+/* 垂直布局 */
+.vertical {
+  flex-direction: column-reverse;
+}
+
+/* 水平布局 */
+.horizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.gravity-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.gravity-vertical-content {
+  display: flex;
+  align-items: center;
+}
+.gravity-horizontal-content {
+  display: flex;
+  justify-content: center;
+}
+/* 主颜色 */
+.colorPrimary {
+  background-color: var(--weui-BG);
+  color: var(--weui-FG);
+}
+
+/* 二级颜色 */
+.colorSecondary {
+  background-color: var(--weui-BG-secondary);
+  color: var(--weui-FG);
+}
+
+/* 主颜色字体 */
+.colorPrimary_font {
+  color: var(--weui-BG);
+}
+
+/* 二级颜色 */
+.colorSecondary {
+  background-color: var(--weui-BG-secondary);
+  color: var(--weui-FG);
+}

@@ -1,0 +1,13 @@
+<!--pages/mine/about/official.wxml-->
+<view class='margin-xl margin-top bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于Efficiency知识点</view>
+  <view class='text-content'>
+
+    <view class='margin-top-sm'>Efficiency知识点，公众文章最近没有时间编写，欢迎有志同道合之士，与我我共同维护</view>
+    <view class='margin-top-sm'>文章内容-优质知识点，永不发广告.</view>
+  </view>
+
+  <image src="/images/ic_oa_qr_code.png" style="width: 550rpx; height: 214rpx; display: inline-block; box-sizing: border-box; left: 0rpx; top: 0rpx">
+  </image>
+  </view>
+

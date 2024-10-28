@@ -1,0 +1,67 @@
+<!--pages/mine/mine.wxml-->
+<view class="page" >
+
+  <view class="tops">
+  </view>
+  <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl  shadow-warp radius animation-slide-left"  style="animation-delay:0.4s">
+    <!-- <view class="cu-item arrow">
+      <view class="content" bindtap="showThemeList">
+        <text class="cuIcon-discoverfill text-red"></text>
+        <text class="text-black">更换主题</text>
+      </view>
+    </view> -->
+    <view class="cu-item arrow">
+      <button class="cu-btn content" open-type="feedback">
+        <text class="cuIcon-writefill text-cyan"></text>
+        <text class="text-black">意见反馈</text>
+      </button>
+    </view>
+
+    <view class="cu-item arrow">
+      <navigator class="content"
+       target="miniProgram"
+      app-id="wxdd704a218e411493"
+       hover-class="none">
+        <image src="/images/aistady.png" class="png" mode="aspectFit"></image>
+        <text class="text-black">生理学-刷题小程序:幻羽轩</text>
+      </navigator>
+    </view>
+
+    <view class="cu-item arrow">
+      <navigator class="content" url="/pages/mine/about/about" hover-class="none">
+        <image src="/images/ic_logo.png" class="png" mode="aspectFit"></image>
+        <text class="text-black">关于WENJIE课表</text>
+      </navigator>
+    </view>
+
+
+    <view class="cu-item arrow">
+      <view class="content" bindtap="deleteAllData">
+        <text class="cuIcon-deletefill text-red"></text>
+        <text class="text-black">清除缓存</text>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+
+
+<!-- 选择主题弹窗 -->
+<view class="cu-modal {{theme_list_show == true ? 'show': ''}}" bindtap="hideThemeList">
+  <view class="cu-dialog" catchtap>
+    <radio-group class="block">
+      <view class="cu-list menu text-left">
+        <view class="cu-item" wx:for="{{theme_list}}" wx:key="index" data-index="{{index}}" bindtap="SelecThemeColor">
+          <label class="flex justify-between align-center flex-sub">
+            <view class="cu-avatar round lg bg-{{item.color}} margin-xs">
+              <text class="avatar-text">{{item.colorName}}</text>
+            </view>
+            <!-- <view class="flex-sub">{{item.colorName}}</view> -->
+            <radio class="round"></radio>
+          </label>
+        </view>
+      </view>
+    </radio-group>
+  </view>
+</view>

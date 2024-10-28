@@ -1,0 +1,340 @@
+<view data-weui-theme="{{theme}}">
+
+  <view class="diy-nav" style="height:{{customBar}}px;">
+    <view class='select_week' style="height:{{customBar}}px;padding-top:{{statusBar}}px;">
+      <picker class='week_num' mode="selector" range="{{zhou_num}}" bindchange="select" value="{{now_week-1}}">
+        <view style="line-height:{{customBar-statusBar}}px;height:100%">
+          <text class="text-black text-lg">第 {{now_week}} 周 </text>
+          <text class="cuIcon-unfold lg text-black"></text>
+        </view>
+      </picker>
+
+      <view class="flex solid-bottom justify-start top-left " style="top:{{statusBar}}px;line-height:{{customBar-statusBar}}px;height:{{customBar-statusBar}}px">
+
+        <text class="cuIcon-add settings" style="transform: rotate({{list_is_display?135:0}}deg)" bindtap='listDisplay'>
+        </text>
+      </view>
+
+    </view>
+  </view>
+  <view class="mask" bindtap="hideMask" style='height:{{winHeight-customBar}}px;top:{{customBar}}px' wx:if="{{list_is_display}}"></view>
+  <view class="list" style='height:{{7*117+4+customBar}}rpx;top:{{list_is_display?0:-(7*117+4+customBar)}}rpx'>
+    <view style="height:{{customBar}}px;width:100%;background:#fff"></view>
+    <view class="flex">
+      <view class="flex-sub" bindtap='updateCourseModal'>
+        <view class="flex justify-center margin-xs">
+          <view class="cu-avatar lg round colorPrimary shadow-blur">
+            <view class="cuIcon-add">
+            </view>
+          </view>
+        </view>
+        <text class="flex justify-center">添加课表</text>
+      </view>
+      <view class="flex-sub" bindtap='courseList'>
+        <view class="flex justify-center margin-xs">
+          <view class="cu-avatar lg round colorPrimary shadow-blur">
+            <view class="cuIcon-circle">
+            </view>
+          </view>
+        </view>
+        <text class="flex justify-center">课程管理</text>
+      </view>
+      <view class="flex-sub" bindtap='setTime'>
+        <view class="flex justify-center margin-xs">
+          <view class="cu-avatar lg round colorPrimary shadow-blur">
+            <view class="cuIcon-time">
+            </view>
+          </view>
+        </view>
+        <text class="flex justify-center">查看时间</text>
+      </view>
+      <view class="flex-sub " bindtap='shareCourse'>
+        <view class="flex justify-center margin-xs">
+          <view class="cu-avatar lg round colorPrimary shadow-blur">
+            <view class="cuIcon-share">
+            </view>
+          </view>
+        </view>
+        <text class="flex justify-center">分享课表</text>
+      </view>
+    </view>
+    <view class="cu-list menu sm-border">
+      <view class="cu-item arrow" bindtap='setBg'>
+        <view class="content">
+          <text class="text-grey">课表背景</text>
+        </view>
+        <view class="action">
+          <text class="text-grey text-sm">{{imageUrl!=''?'已设置':'未设置'}}</text>
+        </view>
+      </view>
+      <view class="cu-form-group cu-item">
+        <view class="text-grey">每周起始日</view>
+        <picker bindchange="setStartDay" value="{{startDay}}" range="{{startDays}}">
+          <view class="picker text-grey">
+            {{startDay?startDays[startDay]:'周一'}}
+          </view>
+        </picker>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">仅显示本周要上的课程</text>
+        </view>
+        <view class="action">
+          <switch class="theme sm" checked="{{onlyThisWeek}}" bindchange="displayOnlyWeek"></switch>
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">显示上下课时间</text>
+        </view>
+        <view class="action">
+          <switch class="theme sm" checked="{{display_course_time}}" bindchange="displayClassTime"></switch>
+        </view>
+      </view>
+
+      <!-- <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">首页显示今日课程</text>
+        </view>
+        <view class="action">
+          <switch class="theme sm" checked="{{display_Courses_OnThe_HomePage}}" bindchange="displayCoursesOnTheHomePage"></switch>
+        </view>
+      </view> -->
+
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">边框透明度</text>
+          <view class="slider">
+            <slider data-type='frime' bindchange="sliderchange" activeColor="#1380ff" value='{{Kopacity}}' min="0" max="100" show-value />
+          </view>
+        </view>
+      </view>
+      <view class="cu-item">
+        <view class="content">
+          <text class="text-grey">课表透明度</text>
+          <view class="slider">
+            <slider data-type='course' bindchange="sliderchange" activeColor="#1380ff" value='{{Copacity}}' min="0" max="100" show-value />
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <float-tool page="course"></float-tool>
+  <!-- 背景图片 -->
+  <view class='bg-content'>
+    <image class="course_bg" src="{{imageUrl}}" mode="aspectFill"> </image>
+  </view>
+
+  <view class="top" style="background-color:rgba(220,220,220,{{(100-Kopacity)/100}})">
+    <view class='jie month'>
+      <view>{{now_month}}</view>
+      <view>月</view>
+    </view>
+    <view class="date">
+      <view class="course-table week {{(todayMonth == now_month_number && now_week==nowWeek && todayDay==item)?'todayDate colorPrimary':''}}" wx:for="{{now_day}}" wx:key="key" wx:index="index" data-weui-theme="{{theme}}">
+        <view class="week-item">周{{zhou[index]}}</view>
+        <view class="date-item">{{
+          index > 0 && ((now_day[index] == 1 && startDay == 1) || (now_day[index] == 1 && startDay==0 && zhou[index] !=
+          '日')) ?
+          (now_month_number<12?now_month_number+1:1)+'月' : now_day[index]+'日' }} </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-x="false" scroll-y="true" scroll-top="{{scrollTop}}" class="scroll" bindtouchstart='touchStart' bindtouchend="touchEnd">
+    <view class='course-content'>
+      <view class='jie' style="background-color:rgba(220,220,220,{{(100-Kopacity)/100}})">
+        <view wx:for="{{12}}" wx:key="key" wx:index="index" class="left">
+          <view class="number">{{item+1}}</view>
+          <!-- <view class="course-time" wx:if="{{display_course_time == 1 && !((index == 2 || index == 3) && area == 1)}}"> -->
+          <view class="course-time flex" wx:if="{{display_course_time}}">
+            <view class="text-grey text-xs time-start">{{course_times[index][0]!= "" ? course_times[index][0] : '堂'}}
+            </view>
+            <view class="text-grey text-xs time-end">{{course_times[index][1] != "" ? course_times[index][1] : '连'}}
+            </view>
+            <view class="text-green time-end" wx:if="{{(index%2 == 0 ?false:true)&& display_course_time}}" style="position: absolute; top: 83rpx">__</view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 课程数据 -->
+      <view class="course">
+        <view class="{{toggleDelay?'animation-scale-up':''}} kcb-item" wx:for="{{course}}" wx:key="key" wx:if="{{item.display}}" bindtap="displayCourseInfo" data-num="{{item.indexNum}}" form-type="submit" style="animation-delay: {{(index%2==0?(index/2):(index-1)/2+1)*0.01}}s;margin-left:{{(item.week - startDay)*(92/7)}}%;margin-top:{{(item.jie-1)*110+4}}rpx;height:{{item.jieshu*110 - 4}}rpx">
+
+          <view class="smalltext {{item.courseNum>1?'moreCourse':''}}" style="color:{{!item.thisWeek?'#aab9cc':'#fff'}};background-color:rgba({{!item.thisWeek?'236,245,255':colorArrays[item.num]}},{{(100-Copacity)/100}});-webkit-line-clamp: {{item.jieshu*3}};">
+            {{!item.thisWeek?'[非本周]':''}}{{item.name}}
+            <view class="toBottom">{{item.address ? item.address : ''}}</view>
+          </view>
+
+        </view>
+
+        <view wx:if="{{ad.display}}" class='kcb-item' style="margin-left:{{(ad.week-1)*(92/7)}}%;margin-top:{{(ad.jie-1)*110+4}}rpx;height:{{ad.jieshu*110 - 4}}rpx">
+          <view class="smalltext" bindtap="goAd" style="background:{{ad.background}};color:{{ad.color}};">{{ad.title}}
+          </view>
+          <view bindtap="closeAd" class="ad-close icon-roundclose text-center text-grey"></view>
+        </view>
+
+        <view class="course-labels">
+          <view class="margin-top-sm text-right tmp-class" wx:if="{{tmpClass!=''}}"><text class="label">{{tmpClass.name}}</text></view>
+          <view class="margin-top-sm text-right user-term" wx:if="{{userTerm}}"><text class="label">{{userTerm.name}}({{userTerm.classname}})</text></view>
+          <view class="margin-top-sm text-right course-term" wx:if="{{courseTerm && courseTerm.term && courseTerm.term != thisTerm}}"><text class="label">距离最后一节课还有{{daysTolastClass}}天</text></view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="water {{clickStatus}}" style="top:{{finishY}}px;left:{{finishX}}px;"></view>
+
+  <!-- 弹出课程 -->
+  <view class="showMoreCourse" wx:if="{{showMoreCourse}}" bindtap="hideMoreCourse">
+    <view class="courseList grid col-2">
+      <!-- 本周的课程 -->
+      <view class="animation-scale-up padding" style="animation-duration: 0.2s" wx:if="{{item.thisWeek}}" wx:for="{{moreCourseList}}" wx:key="key" bindtap="displayCourseInfo" data-display="true" data-num="{{item.indexNum}}">
+        <view class="li shadow-blur text-white" style="background-color:rgba({{item.num<colorArrays.length-1?colorArrays[item.num]:colorArrays[colorArrays.length-1]}})">
+          <view>
+            <view class="cu-tag radius line-white">本周</view>
+            <text class="text-bold"> {{item.fullName}}</text>
+          </view>
+          <view class="margin-top-sm">{{item.address ? '@' + item.address : ''}}</view>
+        </view>
+      </view>
+      <!-- 非本周的课程 -->
+      <view class="animation-scale-up padding" style="animation-duration: 0.2s" wx:if="{{!item.thisWeek}}" wx:for="{{moreCourseList}}" wx:key="key" bindtap="displayCourseInfo" data-display="true" data-num="{{item.indexNum}}">
+        <view class="li shadow-blur text-grey" style="background-color:rgba(236,245,255)">
+          <view>
+            <view class="cu-tag radius line-grey">非本周</view>
+            <text class="text-bold"> {{item.fullName}}</text>
+          </view>
+          <view class="margin-top-sm">{{item.address ? '@' + item.address : ''}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class="stop-course" wx:if="{{courseConfig.status==0}}">
+    <view class="stop-content">
+      <view class="text-theme text-center">
+        {{courseConfig.tips}}
+      </view>
+    </view>
+  </view>
+
+  <view class="cu-modal {{updatingCourse?'show':''}}" style="position: fixed; left: 0rpx; top: 2rpx">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="content">欢迎使用WENJIE课表</view>
+        <view class="action" bindtap="closeUpdateCourseModal">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+
+      <view class="padding-xs">
+
+        <view class="text-center padding-sm bg-white y-radius text-left margin-sm">
+          <view class="text-blue text-center text-lg">请认真阅读以下使用条款</view>
+          <view class="margin-top-sm">
+            （WENJIE课表）是通过非官方渠道从教务系统获取数据，无法保证课表完整无误，请以老师发的课表为准！
+            <text class="text-theme"> （WENJIE课表）只负责整理数据，不承担使用过程中产生的后果哦！</text>
+          </view>
+          <view class="margin-top-sm text-grey text-left">
+            <radio-group bindchange="acceptTerms">
+              <radio value="acceptTerms" class="theme"></radio><text class="padding-left-xs">本人已阅读条款并愿承担一切风险</text>
+            </radio-group>
+          </view>
+        </view>
+
+        <picker mode="multiSelector" bindchange="bindSchoolPickerChange" value="{{multiIndex}}" range="{{multiArray}}">
+          <view class="cu-bar btn-group" wx:if="{{acceptTerms}}">
+            <button class="cu-btn bg-green shadow-blur round lg">
+              <view>
+                绑定班级
+              </view>
+            </button>
+          </view>
+        </picker>
+      </view>
+    </view>
+  </view>
+
+
+  <view class="cu-modal {{showHomeDialogMessage?'show':''}}" style="position: fixed; left: 0rpx; top: -2rpx">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white">
+        <view class="content">{{homeDialogMessageData.des}}</view>
+      </view>
+      <view class="padding-xs">
+        <view class="text-center padding-sm bg-white y-radius text-left margin-sm">
+          <view class="text-black text-lg cu-textarea">{{homeDialogMessageData.content}}</view>
+        </view>
+
+      </view>
+       <view class="cu-bar btn-group">
+          <button class="cu-btn bg-green shadow-blur round" bindtap="closeHomeDialogMessage">
+            <view>
+              知道啦！
+            </view>
+          </button>
+        </view>
+    </view>
+  </view>
+
+  <view class="cu-modal {{showFarewell?'show':''}}" style="position: fixed; left: 0rpx; top: -2rpx">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white">
+        <view class="content">感谢使用WENJIE课表</view>
+      </view>
+      <view class="padding-xs">
+        <view class="text-center padding-sm bg-white y-radius text-left margin-sm">
+          <view class="text-blue text-lg">我栽了个跟头，爬起来，站了很久，我要走咯。美好的大学课堂生活已接进尾声，谢谢你{{myAge}}天的陪伴。
+          </view>
+          <view class="text-black text-lg"> 悄悄的我走了，</view>
+          <view class="text-black text-lg"> 正如我悄悄的来；</view>
+          <view class="text-black text-lg"> 我挥一挥衣袖，</view>
+          <view class="text-black text-lg"> 不带走一片云彩。</view>
+          <view class="text-black text-lg"> 如果有一天你喜欢上了别人一定要告诉我</view>
+        </view>
+        <view class="cu-bar btn-group">
+          <button class="cu-btn bg-green shadow-blur round" bindtap="closeFarewell">
+            <view>
+              有缘我们还会相见的
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+
+
+  <view class="cu-modal {{showLeavingMessage?'show':''}}" style="position: fixed; left: 0rpx; top: 2rpx">
+    <view class="cu-dialog">
+      <view class="cu-bar bg-white justify-end">
+        <view class="margin-right-sm">对不起啦，以后的日子我要缺席了</view>
+        <view class=" action" bindtap="closeLeavingMessage">
+          <text class="cuIcon-close"></text>
+        </view>
+      </view>
+      <view class="padding-xs">
+        <view class="padding-sm bg-white y-radius text-left margin-sm">
+          <view class="text-black">
+            从夏天开始，也从夏天结束。
+          </view>
+          <view class="margin-top-sm text-black">
+            愿你所遇之人皆良善，所到之地皆为热土。
+          </view>
+        </view>
+
+        <view class="cu-bar btn-group">
+          <button class="cu-btn bg-green shadow-blur round lg" open-type="contact" bindcontact="handleContact">
+            <view>
+              私信留言
+            </view>
+          </button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+</view>

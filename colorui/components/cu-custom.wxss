@@ -1,0 +1,4 @@
+/* colorui/components/cu-custom.wxss */
+.title-left{
+  padding: 4rpx 10px;
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "WENJIE课表",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "float-tool": "/pages/components/float-tool/float-tool"
+  }
+}

@@ -1,0 +1,26 @@
+<cu-custom bgColor="bg-white" isBack="true">
+  <view slot="back">返回</view>
+	<view slot="content">查看上课时间</view>
+</cu-custom>
+<!-- <view class="cu-form-group margin-top">
+  <view class="title">设置校区</view>
+  <picker bindchange="setArea" value="{{area>0?area-1:area}}" range="{{areas}}">
+    <view class="picker">
+      {{area?areas[area-1]:'未设置'}}
+    </view>
+  </picker>
+</view> -->
+
+<view class="cu-form-group">
+  <view class="title">暂时不支持设置哦 ~</view>
+  <!-- <switch class="theme sm" checked="{{status}}" bindchange="switchStatus"></switch> -->
+</view>
+
+<view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius ">
+    <view class="cu-item arrow" wx:for="{{12}}"wx:key="key" wx:index="index">
+      <view class="content flex justify-between" bindtap="CopyLink">
+        <text class="text-grey">第{{timeList.num[index]}}节</text>
+        <text class="text-grey">{{timeList.timeSlot[index][0]}} ~ {{timeList.timeSlot[index][1]}}</text>
+      </view>
+    </view>
+  </view>

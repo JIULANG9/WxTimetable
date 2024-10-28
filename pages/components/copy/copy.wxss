@@ -1,0 +1,7 @@
+@import "../../../colorui/main.wxss";
+@import "../../../colorui/icon.wxss";
+
+.copy{
+  display: inline-flex;
+  padding: 8rpx 12rpx;
+}

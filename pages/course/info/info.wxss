@@ -1,0 +1,6 @@
+
+.gravity_bottom{
+  position:fixed;
+  bottom:66rpx;
+  width: 750rpx;
+}

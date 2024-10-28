@@ -1,0 +1,28 @@
+/* pages/mine/mine.wxss */
+.page {
+  min-height: 100vh;
+  background: #fff;
+  /* font-size: 16px;
+  font-family: -apple-system-font, Helvetica Neue, Helvetica, sans-serif */
+}
+
+.gif-wave {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  mix-blend-mode: screen;
+  height: 100rpx;
+}
+
+.top {
+  width: 100%;
+  height: 220rpx;
+  background: #23EBB9;
+  position: relative;
+}
+
+.tops {
+  width: 100%;
+  height: 220rpx;
+  background: #fff;
+}

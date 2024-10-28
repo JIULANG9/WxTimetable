@@ -1,0 +1,5 @@
+/* pages/components/navigation-bar/navigation-bar.wxss */
+
+.title-left{
+  padding: 4rpx 10px;
+}

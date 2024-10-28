@@ -1,0 +1,19 @@
+<!--pages/mine/about/about.wxml-->
+
+
+<view class='margin-xl margin-top bg-white padding-xl radius shadow-lg'>
+  <view class='text-center margin-bottom text-lg  text-grey'>关于WENJIE课表</view>
+  <view class='text-content'>
+
+    <view class='margin-top-sm'>WENJIE课表的数据通过非官方途径获取，如有问题可以在反馈入口提交</view>
+    <view class='margin-top-sm'>本小程序纯粹课表,初心就是为了方便.</view>
+    <view class='margin-top-sm'>我是该小程序开发者——JIULANG，如果你有一些好的想法可以在反馈/意见里提交宝贵的意见。</view>
+    <view class='margin-top-sm'>邮箱：2021662556@qq.com</view>
+    <view class='margin-top-sm'>微信：ISSWENJIE</view>
+    <view class='margin-top-sm'>更多功能敬请期待！</view>
+
+    <view class='margin-top-sm text-black'>本小程序不会收集个人信息，不会收取任何费用，不会插入任何广告。请您放心使用!</view>
+
+  </view>
+  </view>
+

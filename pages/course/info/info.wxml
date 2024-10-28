@@ -1,0 +1,78 @@
+<cu-custom bgColor="bg-white" isBack="true">
+  <view slot="back">返回</view>
+	<view slot="content">课程详情</view>
+</cu-custom>
+<view class="cu-bar bg-white text-xl solid-bottom">
+  <view class="text-black action">
+    {{course.fullName || course.name}}
+    <view wx:if="{{course.type == 2}}" bindtap="edit" class="margin-left cu-tag line-theme radius">编辑</view>
+  </view>
+</view>
+<view class="cu-list menu sm-border,text-blue">
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-calendar text-theme"></text>
+      <text class="text-theme">周数　</text>
+      <text class="text-black">{{course.zhoushu}}{{course.danshuang == 1 ? '(单)' : (course.danshuang == 2 ? '(双)' : '')}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-list text-theme"></text>
+      <text class="text-theme">节数　</text>
+      <text class="text-black">{{course.section}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-time text-theme"></text>
+      <text class="text-theme">时间　</text>
+      <!-- <text>具体上课时间请参考作息表</text> -->
+      <!-- <text class="text-black">{{ (course.jie==1 && course.jieshu==4 || course.jie==3 && course.jieshu==2) ? "第3-4节上课时间有争议，暂不显示" : course.time}}
+      </text> -->
+      <text class="text-black">{{course.time}}</text>
+      <!-- <text wx:else bindtap="setTime" class="text-black">设置校区后可查看 <text class="text-blue">点击设置</text></text> -->
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-location text-theme"></text>
+      <text class="text-theme">地点　</text>
+      <text class="text-{{course.address?'black':'grey'}}">{{course.address ? course.address : '未知'}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-people text-theme"></text>
+      <text class="text-theme">老师　</text>
+      <text class="text-{{course.teacher?'black':'grey'}}">{{course.teacher ? course.teacher : '未知'}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-tag text-theme"></text>
+      <text class="text-theme">学分　</text>
+      <text class="text-{{course.credit?'black':'grey'}}">{{course.credit ? course.credit : '未知'}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-apps text-theme"></text>
+      <text class="text-theme">人数　</text>
+      <text class="text-{{course.numberOfPeople?'black':'grey'}}">{{course.numberOfPeople ? course.numberOfPeople : '未知'}}</text>
+    </view>
+  </view>
+  <view class="cu-item">
+    <view class="content">
+      <text class="cuIcon-post text-theme"></text>
+      <text class="text-theme">考查　</text>
+      <text class="text-{{course.method?'black':'grey'}}">{{course.method ? course.method : '未知'}}</text>
+    </view>
+  </view>
+</view>
+
+
+
+<view class="align-end gravity_bottom ">
+      <button class="cu-btn bg-red lg margin round shadow flex" bindtap="deleteCourse">删除课程</button>
+    </view>
